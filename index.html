@@ -4,8 +4,7 @@
 <meta name="description" content="Arpan Das, PhD student in Plant Breeding at Texas A&M University. MRI root phenotyping and plant physiology.">
 <meta name="theme-color" content="#0b1a14">
 <script>
-// Start in dark/green theme on the first visit. If the visitor later picks a theme
-// with the toggle, that saved choice is respected on their next visit.
+// Start in dark/green theme on the first visit; a later choice made with the toggle is respected.
 (function(){
  var de = document.documentElement, saved = null;
  try { saved = localStorage.getItem("theme") || localStorage.getItem("color-theme") || localStorage.getItem("site-theme"); } catch(e){}
@@ -19,7 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
- /* ===== Dark / green theme (applies only while the site is in dark mode) ===== */
+ /* Dark / green theme (applies only while the site is in dark mode) */
  html[data-theme="dark"], html.dark{
   --bg:#0b1a14; --background:#0b1a14; --bg-alt:#10241b; --surface:#10241b; --card:#12281e;
   --fg:#e6f2ea; --text:#e6f2ea; --ink:#e6f2ea; --muted:#9bb8a8; --muted-text:#9bb8a8;
@@ -31,15 +30,14 @@
  html[data-theme="dark"] a{color:#4ade80}
  html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3{color:#f1faf4}
 
- /* ===== Portrait + intro layout ===== */
- .home-hero{display:flex;align-items:center;justify-content:flex-start;gap:3rem;flex-wrap:wrap;max-width:920px}
- .home-hero>.home-intro{flex:1 1 360px;max-width:560px;min-width:0}
+ /* Portrait + intro layout (added) */
+ .home-hero{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+ .home-hero>.home-intro{flex:1 1 320px;min-width:0}
  .home-photo{flex:0 0 auto;margin:0}
  .home-photo img{display:block;width:240px;height:240px;object-fit:cover;object-position:center top;border-radius:50%;
-  border:4px solid rgba(74,222,128,.45);box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 8px rgba(74,222,128,.08)}
+  border:4px solid rgba(128,128,128,.25);box-shadow:0 10px 30px rgba(0,0,0,.18)}
  @media (max-width:640px){
-  .home-hero{flex-direction:column-reverse;text-align:center;gap:1.5rem;align-items:center}
-  .home-hero>.home-intro{max-width:100%}
+  .home-hero{flex-direction:column-reverse;text-align:center;gap:1.5rem}
   .home-photo img{width:180px;height:180px}
  }
 </style></head>
@@ -87,13 +85,13 @@
 <script src="app.js"></script>
 <script>
 (function(){
- // 1) Browser tab title
+ // 1) Browser tab title: always "Arpan Das | PhD Student, Texas A&M University"
  var TITLE = "Arpan Das | PhD Student, Texas A&M University";
  function setTitle(){ document.title = TITLE; }
  setTitle();
  window.addEventListener("load", setTitle);
 
- // 2) Portrait photo next to the intro (upload your photo as arpan.jpg in the same folder)
+ // 2) Portrait photo beside the intro (put your photo in the same folder as arpan.jpg)
  var tries = 0;
  function placePhoto(){
   var main = document.querySelector("main");
