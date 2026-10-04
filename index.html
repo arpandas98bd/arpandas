@@ -1,35 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" class="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arpan Das | PhD Student, Texas A&amp;M University</title>
 <meta name="description" content="Arpan Das, PhD student in Plant Breeding at Texas A&M University. MRI root phenotyping and plant physiology.">
-<meta name="theme-color" content="#0b1a14">
-<script>
-// Start in dark/green theme on the first visit; a later choice made with the toggle is respected.
-(function(){
- var de = document.documentElement, saved = null;
- try { saved = localStorage.getItem("theme") || localStorage.getItem("color-theme") || localStorage.getItem("site-theme"); } catch(e){}
- if (saved === "light") { de.setAttribute("data-theme","light"); de.classList.remove("dark"); }
- else {
-  de.setAttribute("data-theme","dark"); de.classList.add("dark");
-  try { if (!saved) localStorage.setItem("theme","dark"); } catch(e){}
- }
-})();
-</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
- /* Dark / green theme (applies only while the site is in dark mode) */
- html[data-theme="dark"], html.dark{
-  --bg:#0b1a14; --background:#0b1a14; --bg-alt:#10241b; --surface:#10241b; --card:#12281e;
-  --fg:#e6f2ea; --text:#e6f2ea; --ink:#e6f2ea; --muted:#9bb8a8; --muted-text:#9bb8a8;
-  --accent:#4ade80; --accent-color:#4ade80; --primary:#4ade80; --link:#4ade80;
-  --border:#1f3d2e; --line:#1f3d2e; --rule:#1f3d2e; color-scheme:dark;
- }
- html[data-theme="dark"] body{background:#0b1a14;color:#e6f2ea}
- html[data-theme="dark"] nav,html[data-theme="dark"] footer{background:#0b1a14;border-color:#1f3d2e}
- html[data-theme="dark"] a{color:#4ade80}
- html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3{color:#f1faf4}
-
  /* Portrait + intro layout (added) */
  .home-hero{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
  .home-hero>.home-intro{flex:1 1 320px;min-width:0}
@@ -112,6 +87,30 @@
   hero.appendChild(fig);
  }
  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", placePhoto); else placePhoto();
+
+ // 3) First landing: press the theme button once, automatically, so the visitor
+ //    sees the same look they get after clicking it. Runs once per browser.
+ var FLAG = "arpan_theme_auto_toggled";
+ var seen = false;
+ try { seen = localStorage.getItem(FLAG) === "1"; } catch(e){}
+ if (!seen) {
+  var t2 = 0;
+  function findToggle(){
+   var sel = ["#theme-toggle","#themeToggle","#theme","#toggle-theme",".theme-toggle",".theme-btn","[data-theme-toggle]","[data-toggle-theme]",
+              "button[aria-label*='theme' i]","button[title*='theme' i]","[aria-label*='theme' i]","[title*='theme' i]"];
+   for (var i=0;i<sel.length;i++){ var el = document.querySelector(sel[i]); if (el) return el; }
+   var cands = document.querySelectorAll("nav button, header button, nav a, header a");
+   for (var j=0;j<cands.length;j++){ if (/theme|dark|light|mode/i.test(cands[j].textContent || "")) return cands[j]; }
+   return null;
+  }
+  function autoToggle(){
+   var btn = findToggle();
+   if (!btn) { if (t2++ < 40) setTimeout(autoToggle, 50); return; }
+   btn.click();
+   try { localStorage.setItem(FLAG, "1"); } catch(e){}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", autoToggle); else autoToggle();
+ }
 })();
 </script>
 </body></html>
