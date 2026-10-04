@@ -2,7 +2,33 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arpan Das</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css"></head>
+<link rel="stylesheet" href="style.css">
+<style>
+ /* Photo gallery */
+ .lab-gallery{max-width:1100px;margin:3rem auto 2rem;padding:0 1.25rem}
+ .lab-gallery h2{margin:0 0 .35rem}
+ .lab-gallery .lg-sub{opacity:.75;margin:0 0 1rem}
+ .lg-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+ .lg-filters button{font:inherit;cursor:pointer;padding:.35rem .9rem;border-radius:999px;border:1px solid rgba(128,128,128,.4);background:transparent;color:inherit}
+ .lg-filters button[aria-pressed="true"]{background:rgba(74,160,110,.25);border-color:rgba(74,160,110,.8)}
+ .lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem}
+ .lg-item{position:relative;padding:0;border:0;background:#222;border-radius:12px;overflow:hidden;cursor:zoom-in;aspect-ratio:4/3;display:block}
+ .lg-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+ .lg-item:hover img,.lg-item:focus-visible img{transform:scale(1.06)}
+ .lg-item:focus-visible{outline:3px solid #4ade80;outline-offset:2px}
+ .lg-cap{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .7rem .55rem;color:#fff;font-size:.85rem;line-height:1.3;text-align:left;
+  background:linear-gradient(transparent,rgba(0,0,0,.8))}
+ .lg-badge{position:absolute;top:.5rem;left:.5rem;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;padding:.15rem .55rem;border-radius:999px}
+ .lg-box{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;flex-direction:column;padding:1rem}
+ .lg-box.open{display:flex}
+ .lg-box img{max-width:94vw;max-height:78vh;border-radius:8px;object-fit:contain}
+ .lg-box .lg-text{color:#eee;margin-top:.9rem;text-align:center;max-width:800px}
+ .lg-box .lg-count{color:#aaa;font-size:.8rem;margin-top:.3rem}
+ .lg-btn{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;width:46px;height:46px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+ .lg-btn:hover{background:rgba(255,255,255,.25)}
+ .lg-close{top:1rem;right:1rem}.lg-prev{left:1rem;top:50%}.lg-next{right:1rem;top:50%}
+</style>
+</head>
 <body><nav></nav><main></main><footer></footer>
 <!-- EDIT THIS DATA: it is the content of the page -->
 <script>window.PAGE={
@@ -109,4 +135,70 @@
  ],
  "id": "lab-experience"
 }</script>
-<script src="app.js"></script></body></html>
+<script src="app.js"></script>
+<script>
+(function(){
+ // Save your photos in an "images" folder next to this file using these names.
+ var PHOTOS=[
+  {src:"images/lab-01.jpg",cat:"Field",cap:"Hand emasculation and pollination between two rice genotypes for hybrid seed production in the field"},
+  {src:"images/lab-02.jpg",cat:"Field",cap:"Growing rice seedlings for hybrid seed production in the Aus season"},
+  {src:"images/lab-03.jpg",cat:"Field",cap:"Rice flowering stage observation"},
+  {src:"images/lab-04.jpg",cat:"Field",cap:"Emasculation practice of mustard for seed production"},
+  {src:"images/lab-05.jpg",cat:"Lab",cap:"Growth chamber maintenance of mungbeans"},
+  {src:"images/lab-06.jpg",cat:"Field",cap:"Sowing F1 wheat seeds in the field for selection in the next generation under heat stress"},
+  {src:"images/lab-07.jpg",cat:"Field",cap:"Emasculation and pollination of elite wheat genotypes for hybrid production"},
+  {src:"images/lab-08.jpg",cat:"Lab",cap:"Preparing PCR reagents"},
+  {src:"images/lab-09.jpg",cat:"Lab",cap:"DNA extraction and analysis"}
+ ];
+ var sec=document.createElement("section"); sec.className="lab-gallery"; sec.id="photos";
+ sec.innerHTML='<h2>Photo gallery</h2><p class="lg-sub">Moments from the field and the lab. Click a photo to enlarge.</p><div class="lg-filters"></div><div class="lg-grid"></div>';
+ var grid=sec.querySelector(".lg-grid"), fbar=sec.querySelector(".lg-filters");
+ var box=document.createElement("div"); box.className="lg-box"; box.setAttribute("role","dialog"); box.setAttribute("aria-modal","true");
+ box.innerHTML='<button class="lg-btn lg-close" aria-label="Close">&times;</button><button class="lg-btn lg-prev" aria-label="Previous">&#8249;</button><button class="lg-btn lg-next" aria-label="Next">&#8250;</button><img alt=""><div class="lg-text"></div><div class="lg-count"></div>';
+ var bimg=box.querySelector("img"), btext=box.querySelector(".lg-text"), bcount=box.querySelector(".lg-count");
+ var shown=[], cur=0, filter="All", loaded=0;
+
+ function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+ function visible(){return PHOTOS.filter(function(p){return !p.bad && (filter==="All"||p.cat===filter);});}
+ function render(){
+  shown=visible(); grid.innerHTML="";
+  shown.forEach(function(p,i){
+   var b=document.createElement("button"); b.className="lg-item"; b.type="button"; b.setAttribute("aria-label","Open photo: "+p.cap);
+   b.innerHTML='<img loading="lazy" alt="'+esc(p.cap)+'" src="'+p.src+'"><span class="lg-badge">'+p.cat+'</span><span class="lg-cap">'+esc(p.cap)+'</span>';
+   b.querySelector("img").onerror=function(){p.bad=true;render();if(!PHOTOS.some(function(x){return !x.bad;}))sec.style.display="none";};
+   b.onclick=function(){open(i);};
+   grid.appendChild(b);
+  });
+ }
+ function filters(){
+  fbar.innerHTML="";
+  ["All","Field","Lab"].forEach(function(c){
+   var b=document.createElement("button"); b.type="button"; b.textContent=c; b.setAttribute("aria-pressed",c===filter);
+   b.onclick=function(){filter=c;filters();render();}; fbar.appendChild(b);
+  });
+ }
+ function show(){var p=shown[cur]; if(!p)return; bimg.src=p.src; bimg.alt=p.cap; btext.textContent=p.cap; bcount.textContent=(cur+1)+" / "+shown.length;}
+ function open(i){cur=i;show();box.classList.add("open");document.body.style.overflow="hidden";}
+ function close(){box.classList.remove("open");document.body.style.overflow="";}
+ function step(d){cur=(cur+d+shown.length)%shown.length;show();}
+ box.querySelector(".lg-close").onclick=close;
+ box.querySelector(".lg-prev").onclick=function(e){e.stopPropagation();step(-1);};
+ box.querySelector(".lg-next").onclick=function(e){e.stopPropagation();step(1);};
+ box.onclick=function(e){if(e.target===box)close();};
+ document.addEventListener("keydown",function(e){
+  if(!box.classList.contains("open"))return;
+  if(e.key==="Escape")close(); else if(e.key==="ArrowLeft")step(-1); else if(e.key==="ArrowRight")step(1);
+ });
+ var sx=null;
+ box.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;},{passive:true});
+ box.addEventListener("touchend",function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)step(dx<0?1:-1);sx=null;});
+
+ function mount(){
+  var main=document.querySelector("main"); if(!main)return;
+  main.insertAdjacentElement("afterend",sec); document.body.appendChild(box);
+  filters(); render();
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount); else mount();
+})();
+</script>
+</body></html>
