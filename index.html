@@ -15,6 +15,19 @@
   .home-hero{flex-direction:column-reverse;text-align:center;gap:1.5rem}
   .home-photo img{width:180px;height:180px}
  }
+ /* Research explorer (replaces the CV button) */
+ .explore{max-width:900px;margin:2rem auto 1rem;padding:1.25rem 1.4rem;border:1px solid rgba(128,128,128,.35);border-radius:16px;background:rgba(128,128,128,.07)}
+ .explore h2{margin:0 0 .2rem;font-size:1.25rem}
+ .explore .ex-sub{margin:0 0 .9rem;opacity:.75;font-size:.95rem}
+ .ex-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+ .ex-tabs button{font:inherit;cursor:pointer;padding:.4rem .95rem;border-radius:999px;border:1px solid rgba(128,128,128,.45);background:transparent;color:inherit}
+ .ex-tabs button[aria-selected="true"]{background:#2f9e63;border-color:#2f9e63;color:#fff}
+ .ex-panel{min-height:5.5rem;line-height:1.55}
+ .ex-panel strong{display:block;margin-bottom:.3rem;font-size:1.05rem}
+ .ex-links{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+ .ex-links a{padding:.5rem 1.1rem;border-radius:999px;border:1px solid rgba(128,128,128,.5);text-decoration:none;color:inherit;font-weight:600}
+ .ex-links a.primary{background:#2f9e63;border-color:#2f9e63;color:#fff}
+ .ex-links a:hover{opacity:.85}
 </style></head>
 <body><nav></nav><main></main><footer></footer>
 <!-- EDIT THIS DATA: it is the content of the page -->
@@ -48,11 +61,10 @@
   "publications": "Papers, posters and preprints.",
   "lab-experience": "Field crossing, lab work and MRI.",
   "skills": "Data analysis, lab and field tools.",
-  "cv": "View or download my CV.",
+  "cv": "Highlights, and how to request my full CV.",
   "extra-curricular": "Clubs, debating and volunteering.",
-  "photography": "Photographs from my travels.",
   "blog": "Notes on research and life.",
-  "data-analysis": "Tutorials on R, SPSS and Minitab.",
+  "data-analysis": "Tutorials on R and Minitab.",
   "contact": "Email or send a message."
  },
  "id": "index"
@@ -60,7 +72,7 @@
 <script src="app.js"></script>
 <script>
 (function(){
- // 1) Browser tab title: always "Arpan Das | PhD Student, Texas A&M University"
+ // 1) Browser tab title
  var TITLE = "Arpan Das | PhD Student, Texas A&M University";
  function setTitle(){ document.title = TITLE; }
  setTitle();
@@ -85,11 +97,47 @@
   intro.appendChild(first);
   hero.appendChild(intro);
   hero.appendChild(fig);
+  buildExplorer(hero);
  }
  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", placePhoto); else placePhoto();
 
- // 3) First landing: press the theme button once, automatically, so the visitor
- //    sees the same look they get after clicking it. Runs once per browser.
+ // 3) Interactive "What I work on" panel
+ var TOPICS = [
+  ["Root imaging", "MRI root phenotyping", "I scan wheat roots non-destructively with Magnetic Resonance Imaging to measure root system architecture in soil, working with ABQMR Inc. on scanner settings and with a Harvard team on machine learning for root image analysis."],
+  ["Drought tolerance", "Wheat under water stress", "I screen wild introgression lines and diverse germplasm from Kansas State University to find root traits linked to drought tolerance, so breeders can select for them."],
+  ["Nutrient use", "Biological Nitrification Inhibition", "Using hydroponic systems, I collect root exudates and screen wheat genotypes for BNI activity, a route to crops that lose less nitrogen to the environment."],
+  ["Breeding", "Heat and drought breeding", "At Bangladesh Agricultural University I crossed and characterized wheat, maize, rice and tomato genotypes, including genetic analyses of yield under terminal heat stress."],
+  ["Data tools", "R and Minitab tutorials", "I write step-by-step tutorials on ANOVA, PCA, correlation and diallel analysis for plant breeders."]
+ ];
+ var LINKS = {
+  "Root imaging": ["lab-experience.html", "See my lab work"],
+  "Drought tolerance": ["publications.html", "Read my papers"],
+  "Nutrient use": ["lab-experience.html", "See my lab work"],
+  "Breeding": ["publications.html", "Read my papers"],
+  "Data tools": ["data-analysis.html", "Open the tutorials"]
+ };
+ function buildExplorer(hero){
+  if (document.querySelector(".explore")) return;
+  var box = document.createElement("section"); box.className = "explore";
+  box.innerHTML = '<h2>What I work on</h2><p class="ex-sub">Pick a topic to learn more.</p><div class="ex-tabs" role="tablist"></div><div class="ex-panel" role="tabpanel" aria-live="polite"></div><div class="ex-links"></div>';
+  var tabs = box.querySelector(".ex-tabs"), panel = box.querySelector(".ex-panel"), links = box.querySelector(".ex-links");
+  function show(i){
+   Array.prototype.forEach.call(tabs.children, function(b,k){ b.setAttribute("aria-selected", k===i); });
+   var t = TOPICS[i], l = LINKS[t[0]];
+   panel.innerHTML = "<strong></strong><span></span>";
+   panel.firstChild.textContent = t[1]; panel.lastChild.textContent = t[2];
+   links.innerHTML = '<a class="primary" href="'+l[0]+'">'+l[1]+'</a><a href="cv.html#request-cv">Request my full CV</a>';
+  }
+  TOPICS.forEach(function(t,i){
+   var b = document.createElement("button"); b.type="button"; b.setAttribute("role","tab"); b.textContent = t[0];
+   b.onclick = function(){ show(i); }; tabs.appendChild(b);
+  });
+  hero.insertAdjacentElement("afterend", box);
+  show(0);
+  var n = 0; setInterval(function(){ if (box.matches(":hover") || box.contains(document.activeElement)) return; n = (n+1) % TOPICS.length; show(n); }, 9000);
+ }
+
+ // First landing: press the theme button once, automatically (runs once per browser)
  var FLAG = "arpan_theme_auto_toggled";
  var seen = false;
  try { seen = localStorage.getItem(FLAG) === "1"; } catch(e){}
@@ -111,6 +159,19 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", autoToggle); else autoToggle();
  }
+
+ // 4) Remove any "View/Download CV" button and any Photography links (page removed)
+ var cleanTries = 0;
+ function clean(){
+  var main = document.querySelector("main");
+  document.querySelectorAll('a[href*="photography" i]').forEach(function(a){ var c = a.closest("li") || a; c.remove(); });
+  if (main) main.querySelectorAll("a, button").forEach(function(el){
+   var href = el.getAttribute("href") || "", txt = (el.textContent || "").trim();
+   if (/cv\.pdf/i.test(href) || (txt.length <= 22 && /^(view|download|open|get|see)\b.*\b(cv|resume|résumé)\b/i.test(txt))) el.remove();
+  });
+  if (cleanTries++ < 30) setTimeout(clean, 100);
+ }
+ if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", clean); else clean();
 })();
 </script>
 </body></html>
