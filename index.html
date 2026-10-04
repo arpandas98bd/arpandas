@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arpan Das</title>
+<title>Arpan Das | PhD Student, Texas A&amp;M University</title>
+<meta name="description" content="Arpan Das, PhD student in Plant Breeding at Texas A&M University. MRI root phenotyping and plant physiology.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css"></head>
+<link rel="stylesheet" href="style.css">
+<style>
+ /* Portrait + intro layout (added) */
+ .home-hero{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+ .home-hero>.home-intro{flex:1 1 320px;min-width:0}
+ .home-photo{flex:0 0 auto;margin:0}
+ .home-photo img{display:block;width:240px;height:240px;object-fit:cover;object-position:center top;border-radius:50%;
+  border:4px solid rgba(128,128,128,.25);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+ @media (max-width:640px){
+  .home-hero{flex-direction:column-reverse;text-align:center;gap:1.5rem}
+  .home-photo img{width:180px;height:180px}
+ }
+</style></head>
 <body><nav></nav><main></main><footer></footer>
 <!-- EDIT THIS DATA: it is the content of the page -->
 <script>window.PAGE={
  "type": "home",
+ "title": "PhD Student, Texas A&M University",
  "name": "Arpan Das",
  "role": "PhD student in Plant Breeding, Texas A&M University",
  "tag": "I use MRI and plant physiology to understand how roots adapt to stress, so crops can use nutrients and water more efficiently.",
+ "photo": "arpan.jpg",
  "stats": [
   [
    "MRI",
@@ -42,4 +57,36 @@
  },
  "id": "index"
 }</script>
-<script src="app.js"></script></body></html>
+<script src="app.js"></script>
+<script>
+(function(){
+ // 1) Browser tab title: always "Arpan Das | PhD Student, Texas A&M University"
+ var TITLE = "Arpan Das | PhD Student, Texas A&M University";
+ function setTitle(){ document.title = TITLE; }
+ setTitle();
+ window.addEventListener("load", setTitle);
+
+ // 2) Portrait photo beside the intro (put your photo in the same folder as arpan.jpg)
+ var tries = 0;
+ function placePhoto(){
+  var main = document.querySelector("main");
+  if (!main || !main.firstElementChild) { if (tries++ < 40) setTimeout(placePhoto, 50); return; }
+  if (document.querySelector(".home-hero")) return;
+  var first = main.firstElementChild;
+  var hero = document.createElement("div"); hero.className = "home-hero";
+  var intro = document.createElement("div"); intro.className = "home-intro";
+  var fig = document.createElement("figure"); fig.className = "home-photo";
+  var img = new Image();
+  img.src = window.PAGE.photo || "arpan.jpg";
+  img.alt = "Portrait of Arpan Das";
+  img.onerror = function(){ fig.style.display = "none"; };
+  fig.appendChild(img);
+  main.insertBefore(hero, first);
+  intro.appendChild(first);
+  hero.appendChild(intro);
+  hero.appendChild(fig);
+ }
+ if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", placePhoto); else placePhoto();
+})();
+</script>
+</body></html>
