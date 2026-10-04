@@ -1,217 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Arpan Das | Plant Breeding Researcher</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arpan Das</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
-<style>
-:root{--bg:#f5f6f2;--pn:#fff;--ink:#15221b;--mu:#586a5f;--ac:#1d6b48;--ac2:#b8791a;--ln:#dde4de;--rt:#1d6b48;
---hd:"Newsreader",Georgia,serif;--bd:"Public Sans","Segoe UI",system-ui,sans-serif;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1511;--pn:#16211b;--ink:#e9f0ea;--mu:#9aada1;--ac:#7fdcae;--ac2:#f0c05a;--ln:#26362d;--rt:#7fdcae}}
-:root[data-theme="dark"]{--bg:#0e1511;--pn:#16211b;--ink:#e9f0ea;--mu:#9aada1;--ac:#7fdcae;--ac2:#f0c05a;--ln:#26362d;--rt:#7fdcae}
-html{scroll-behavior:smooth;height:100%;scroll-padding-top:70px}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--bd)}
-h1,h2,h3{font-family:var(--hd);margin:0;line-height:1.1}
-a{color:var(--ac)}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:center;gap:4px;padding:10px 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);overflow-x:auto}
-nav b{font:700 20px var(--hd);margin-right:auto;white-space:nowrap}
-nav a{color:var(--mu);text-decoration:none;padding:5px 11px;border-radius:99px;font-size:14px;font-weight:500;white-space:nowrap}
-nav a.on{background:var(--pn);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ln)}
-.ib{font:500 13px var(--bd);background:var(--pn);color:var(--ink);border:1px solid var(--ln);border-radius:99px;padding:5px 12px;cursor:pointer}
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
-#cv{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
-.hc{position:relative;max-width:1000px;margin:0 auto;padding:64px 20px 72px;display:grid;grid-template-columns:1fr 250px;gap:40px;align-items:center;pointer-events:none}
-.hc a,.hc button,.hc .av{pointer-events:auto}
-h1{font-size:clamp(44px,7vw,72px);letter-spacing:-.02em}
-.role{font:500 20px var(--hd);color:var(--ac);margin:10px 0 14px}
-.tag{max-width:540px;color:var(--mu);font-size:18px;margin:0 0 24px}
-.btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-block;padding:11px 20px;border-radius:8px;background:var(--ac);color:var(--bg);text-decoration:none;font-weight:600}
-.btn.o{background:var(--pn);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ln)}
-.av{width:250px;height:300px;border-radius:14px;background:var(--pn);border:1px solid var(--ln);display:grid;place-items:center;font:700 72px var(--hd);color:var(--ac);overflow:hidden}
-.av img{width:100%;height:100%;object-fit:cover}
-.stats{max-width:1000px;margin:-28px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;position:relative}
-.st{background:var(--pn);border:1px solid var(--ln);border-radius:10px;padding:14px 16px}
-.st b{display:block;font:700 28px var(--hd);color:var(--ac)}
-.st span{color:var(--mu);font-size:14px}
-section{max-width:860px;margin:0 auto;padding:64px 20px 8px}
-h2{font-size:34px;margin-bottom:22px}
-.abt{font-size:18px;max-width:70ch;white-space:pre-wrap}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.tb{border:1px solid var(--ln);background:var(--pn);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font:500 14px var(--bd)}
-.tb.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
-.pnl{background:var(--pn);border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:0 10px 10px 0;padding:20px 22px}
-.pnl h3{font-size:24px;margin-bottom:8px}
-.it{display:grid;grid-template-columns:130px 1fr;gap:6px 24px;padding:18px 0;border-top:1px solid var(--ln);position:relative}
-.it h3{font-size:21px}
-.it .d{color:var(--mu);font-size:14px;padding-top:4px}
-.it .o{color:var(--ac);font-weight:500}
-.it p{margin:6px 0 0;color:var(--mu)}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.sk{display:flex;flex-wrap:wrap;gap:8px}
-.sc{background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:6px 12px;font-weight:500;position:relative}
-.sc small{color:var(--mu);font-weight:400;margin-left:6px}
-.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.gi{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:1px solid var(--ln);cursor:zoom-in}
-.gi img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.gi:hover img{transform:scale(1.05)}
-.emp{color:var(--mu);font-style:italic}
-.cl{display:flex;gap:10px;flex-wrap:wrap}
-footer{text-align:center;color:var(--mu);padding:56px 20px 90px;font-size:14px}
-.x,.add{display:none}
-body.edit .x{display:grid;place-items:center;position:absolute;top:6px;right:0;width:24px;height:24px;border-radius:50%;border:0;background:#c0392b;color:#fff;cursor:pointer;line-height:1;font-size:15px;z-index:2}
-body.edit .sc .x{top:-8px;right:-8px}
-body.edit .add{display:inline-block;margin-top:12px}
-body.edit [data-k]{outline:1px dashed color-mix(in srgb,var(--ac2) 70%,transparent);outline-offset:2px;cursor:text;min-width:2ch}
-body.edit .av{cursor:pointer;outline:2px dashed var(--ac2)}
-#bar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:none;gap:8px;align-items:center;background:var(--ink);color:var(--bg);padding:8px 10px 8px 16px;border-radius:99px;z-index:9;font-size:13px;box-shadow:0 6px 24px #0004;max-width:96vw;flex-wrap:wrap;justify-content:center}
-body.edit #bar{display:flex}
-#bar button{border:0;border-radius:99px;padding:6px 12px;font:600 13px var(--bd);cursor:pointer;background:var(--bg);color:var(--ink)}
-#ov{position:fixed;inset:0;background:#000a;display:none;place-items:center;z-index:20;padding:16px}
-#ov.on{display:grid}
-#md{background:var(--pn);border-radius:14px;padding:22px;width:min(520px,100%);max-height:90vh;overflow:auto}
-#md h3{font-size:22px;margin-bottom:12px}
-#md label{display:block;font-size:13px;color:var(--mu);margin-top:10px}
-#md input,#md textarea{width:100%;font:inherit;padding:9px 11px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink)}
-#md .r{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-#lb{position:fixed;inset:0;background:#000d;display:none;place-items:center;z-index:15;cursor:zoom-out}
-#lb.on{display:grid}
-#lb img{max-width:94vw;max-height:90vh;border-radius:8px}
-:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
-@media(max-width:700px){.hc{grid-template-columns:1fr;padding-top:36px}.av{width:160px;height:190px;font-size:52px;order:-1}.it{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<nav><b>Arpan Das</b><a href="#about">About</a><a href="#research">Research</a><a href="#path">Experience</a><a href="#pubs">Publications</a><a href="#skills">Skills</a><a href="#photos">Photography</a><a href="#contact">Contact</a><button class="ib" id="th">Theme</button><button class="ib" id="ed">Edit page</button></nav>
-
-<header class="hero"><canvas id="cv" aria-hidden="true"></canvas><div class="hc" id="r-hero"></div></header>
-<div class="stats" id="r-stats"></div>
-<section id="about"><h2>About</h2><div id="r-about"></div></section>
-<section id="research"><h2>Research</h2><div id="r-research"></div></section>
-<section id="path"><h2>Education and experience</h2><div id="r-path"></div></section>
-<section id="pubs"><h2>Publications</h2><div id="r-pubs"></div></section>
-<section id="skills"><h2>Skills</h2><div id="r-skills"></div></section>
-<section id="photos"><h2>Photography</h2><div id="r-photos"></div></section>
-<section id="contact"><h2>Contact</h2><div id="r-contact"></div></section>
-<footer>&copy; <span id="yr"></span> Arpan Das</footer>
-
-<div id="bar"><span>Editing. Changes save in this browser.</span><button id="b-links">Edit links</button><button id="b-exp">Export data</button><button id="b-imp">Import data</button><button id="b-rst">Reset</button><button id="b-done">Done</button></div>
-<div id="ov"><div id="md"></div></div>
-<div id="lb"><img alt=""></div>
-
-<script>
-(function(){
-var $=function(s){return document.querySelector(s)};
-var DEF={
-photo:"",name:"Arpan Das",role:"PhD student in Plant Breeding, Texas A&M University",
-tag:"I use MRI and plant physiology to understand how roots adapt to stress, so crops can use nutrients and water more efficiently.",
-stats:[{v:"MRI",l:"Root phenotyping"},{v:"7.5",l:"IELTS overall, no band below 6.5"},{v:"2",l:"Degrees in agriculture and plant breeding"},{v:"3",l:"Languages: Bengali, English, Hindi"}],
-about:"Howdy! I am a PhD student in Plant Breeding at Texas A&M University and a Graduate Research Assistant.\n\nMy research focuses on root system architecture using advanced phenotyping such as Magnetic Resonance Imaging (MRI), nutrient use efficiency, abiotic stress adaptation, and sustainable crop improvement through physiological and molecular approaches.\n\nOutside research I am a photographer, debater, and part-time freelancer in graphic design and data management.",
-res:[{t:"Root system architecture",d:"Using MRI to measure root systems non-destructively inside soil, so architecture can be tracked on the same plant over time."},{t:"Nutrient use efficiency",d:"Comparing how genotypes take up and use nutrients, aiming for crops that need less fertilizer without losing yield."},{t:"Abiotic stress adaptation",d:"Characterizing how genotypes respond to stress such as drought, with physiological and molecular tools."}],
-exp:[
-{t:"PhD, Plant Breeding",o:"Texas A&M University",dt:"Present",d:"Graduate Research Assistant. Root phenotyping with MRI, nutrient efficiency and stress adaptation."},
-{t:"M.Sc., Genetics and Plant Breeding",o:"BAU",dt:"2023 to 2024",d:"Add your thesis title and your main result here."},
-{t:"B.Sc., Agriculture",o:"BAU",dt:"2018 to 2023",d:"Crossing rice and wheat genotypes for hybrid seed, stress characterization, DNA analysis and gel electrophoresis."},
-{t:"Freelancer, graphic design and data management",o:"Part-time",dt:"Ongoing",d:"Add one line about a project or result."},
-{t:"Volunteer and club activities",o:"BAUDS, BAUPS, BAUCC, BDBo",dt:"University",d:"Active member and volunteer across university clubs, including debating."}],
-pubs:[{t:"Add your publication title",d:"Authors, journal, year",u:""}],
-sk:[{n:"R",c:"Data"},{n:"SPSS",c:"Data"},{n:"Minitab",c:"Data"},{n:"Excel",c:"Data"},{n:"MRI root imaging",c:"Lab"},{n:"DNA analysis",c:"Lab"},{n:"Gel electrophoresis",c:"Lab"},{n:"Rice and wheat crossing",c:"Field"},{n:"Graphic design",c:"Creative"},{n:"Photography",c:"Creative"}],
-gal:[],
-lk:{email:"arpandas98bd@gmail.com",linkedin:"https://linkedin.com/in/arpan-das-61b760175",instagram:"https://instagram.com/_arpandas",facebook:"https://fb.com/arpandas.arpan",cv:"https://sites.google.com/view/das-arpan/CV"}
-};
-var KEY="arpan-portfolio-v2",D=JSON.parse(JSON.stringify(DEF)),edit=false,tab=0,filt="All";
-try{var s=localStorage.getItem(KEY);if(s)D=Object.assign(D,JSON.parse(s))}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){alert("Storage is full. Use smaller or fewer photos, or Export data.")}}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function get(p){return p.split(".").reduce(function(o,k){return o[k]},D)}
-function set(p,v){var a=p.split("."),l=a.pop();a.reduce(function(o,k){return o[k]},D)[l]=v}
-function k(p,tag,cls){return"<"+(tag||"span")+(cls?' class="'+cls+'"':"")+' data-k="'+p+'">'+esc(get(p))+"</"+(tag||"span")+">"}
-function del(p,i){return'<button class="x" data-del="'+p+'.'+i+'" aria-label="Delete">×</button>'}
-function link(u,l,cls){return u?'<a class="btn '+(cls||"")+'" href="'+esc(u)+'" target="_blank" rel="noopener">'+l+"</a>":""}
-
-function render(){
- var L=D.lk,mail=L.email?"mailto:"+L.email:"";
- $("#r-hero").innerHTML='<div><h1>'+k("name")+'</h1><div class="role">'+k("role")+'</div><p class="tag">'+k("tag")+'</p><div class="btns">'+link(L.cv,"View CV")+link(mail,"Email me","o")+link(L.linkedin,"LinkedIn","o")+'</div></div><div class="av" id="av">'+(D.photo?'<img alt="Portrait of '+esc(D.name)+'" src="'+D.photo+'">':esc((D.name||"A").charAt(0)))+'</div>';
- $("#r-stats").innerHTML=D.stats.map(function(x,i){return'<div class="st"><b>'+k("stats."+i+".v")+'</b><span>'+k("stats."+i+".l")+"</span></div>"}).join("");
- $("#r-about").innerHTML=k("about","div","abt");
- $("#r-research").innerHTML='<div class="tabs">'+D.res.map(function(r,i){return'<button class="tb'+(i===tab?" on":"")+'" data-tab="'+i+'">'+esc(r.t)+"</button>"}).join("")+'</div>'+(D.res[tab]?'<div class="pnl">'+k("res."+tab+".t","h3")+k("res."+tab+".d","p")+(edit?'<button class="ib" data-del="res.'+tab+'">Delete this topic</button>':"")+"</div>":"")+'<button class="ib add" data-add="res">+ Add topic</button>';
- $("#r-path").innerHTML=D.exp.map(function(e,i){return'<div class="it"><div class="d">'+k("exp."+i+".dt")+"</div><div>"+k("exp."+i+".t","h3")+k("exp."+i+".o","div","o")+k("exp."+i+".d","p")+"</div>"+del("exp",i)+"</div>"}).join("")+'<button class="ib add" data-add="exp">+ Add entry</button>';
- $("#r-pubs").innerHTML=(D.pubs.length?D.pubs.map(function(p,i){return'<div class="it"><div class="d">'+(p.u?'<a href="'+esc(p.u)+'" target="_blank" rel="noopener">View paper</a>':"")+"</div><div>"+k("pubs."+i+".t","h3")+k("pubs."+i+".d","p")+"</div>"+del("pubs",i)+"</div>"}).join(""):'<p class="emp">Add your papers, posters and preprints here.</p>')+'<button class="ib add" data-add="pubs">+ Add publication</button>';
- var cats=["All"];D.sk.forEach(function(s){if(cats.indexOf(s.c)<0)cats.push(s.c)});
- $("#r-skills").innerHTML='<div class="chips">'+cats.map(function(c){return'<button class="tb'+(c===filt?" on":"")+'" data-f="'+esc(c)+'">'+esc(c)+"</button>"}).join("")+'</div><div class="sk">'+D.sk.map(function(s,i){return(filt==="All"||s.c===filt)?'<div class="sc">'+k("sk."+i+".n")+"<small>"+esc(s.c)+"</small>"+del("sk",i)+"</div>":""}).join("")+'</div><button class="ib add" data-add="sk">+ Add skill</button>';
- $("#r-photos").innerHTML=(D.gal.length?'<div class="gal">'+D.gal.map(function(g,i){return'<div class="gi" data-lb="'+i+'"><img alt="Photograph" src="'+g+'">'+del("gal",i)+"</div>"}).join("")+"</div>":'<p class="emp">Turn on Edit page, then add your best photographs.</p>')+'<button class="ib add" data-add="gal">+ Add photo</button>';
- $("#r-contact").innerHTML='<p>Open to research collaborations, internships and postdoctoral opportunities.</p><div class="cl">'+link(mail,"Email","")+link(L.linkedin,"LinkedIn","o")+link(L.instagram,"Instagram","o")+link(L.facebook,"Facebook","o")+"</div>";
- document.querySelectorAll("[data-k]").forEach(function(e){e.contentEditable=edit?"plaintext-only":"false"});
-}
-
-function dlg(title,fields,ok){
- $("#md").innerHTML="<h3>"+title+"</h3>"+fields.map(function(f,i){return"<label>"+f.l+(f.a?'<textarea rows="8" data-i="'+i+'">':'<input data-i="'+i+'" value="'+esc(f.v||"")+'">')+(f.a?esc(f.v||"")+"</textarea>":"")+"</label>"}).join("")+'<div class="r"><button class="ib" id="dc">Cancel</button><button class="btn" id="dk" style="border:0;cursor:pointer">Save</button></div>';
- $("#ov").classList.add("on");
- $("#dc").onclick=function(){$("#ov").classList.remove("on")};
- $("#dk").onclick=function(){var o={};document.querySelectorAll("#md [data-i]").forEach(function(e){o[fields[e.dataset.i].k]=e.value});$("#ov").classList.remove("on");ok(o)};
-}
-function pick(cb,w){var i=document.createElement("input");i.type="file";i.accept="image/*";i.onchange=function(){var f=i.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,w/im.width),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.8))};im.src=r.result};r.readAsDataURL(f)};i.click()}
-
-var ADD={
- res:function(){dlg("Add research topic",[{k:"t",l:"Title"},{k:"d",l:"Description",a:1}],function(o){D.res.push(o);tab=D.res.length-1;save();render()})},
- exp:function(){dlg("Add entry",[{k:"t",l:"Title"},{k:"o",l:"Organization"},{k:"dt",l:"Dates"},{k:"d",l:"What you did and achieved",a:1}],function(o){D.exp.push(o);save();render()})},
- pubs:function(){dlg("Add publication",[{k:"t",l:"Title"},{k:"d",l:"Authors, journal, year"},{k:"u",l:"Link (DOI or URL)"}],function(o){D.pubs.push(o);save();render()})},
- sk:function(){dlg("Add skill",[{k:"n",l:"Skill"},{k:"c",l:"Category (Data, Lab, Field, Creative or new)"}],function(o){o.c=o.c||"Other";D.sk.push(o);save();render()})},
- gal:function(){pick(function(u){D.gal.push(u);save();render()},1000)}
-};
-
-document.addEventListener("click",function(e){
- var t=e.target,a;
- if(a=t.closest("[data-tab]")){tab=+a.dataset.tab;render();return}
- if(a=t.closest("[data-f]")){filt=a.dataset.f;render();return}
- if(a=t.closest("[data-add]")){ADD[a.dataset.add]();return}
- if(a=t.closest("[data-del]")){var p=a.dataset.del.split("."),i=+p.pop();get(p.join(".")).splice(i,1);if(p[0]==="res")tab=0;save();render();return}
- if(edit&&t.closest("#av")){pick(function(u){D.photo=u;save();render()},600);return}
- if(!edit&&(a=t.closest("[data-lb]"))){$("#lb img").src=D.gal[+a.dataset.lb];$("#lb").classList.add("on")}
-});
-$("#lb").onclick=function(){this.classList.remove("on")};
-addEventListener("keydown",function(e){if(e.key==="Escape"){$("#lb").classList.remove("on");$("#ov").classList.remove("on")}});
-document.addEventListener("input",function(e){var a=e.target.closest&&e.target.closest("[data-k]");if(a){set(a.dataset.k,a.innerText);save()}});
-document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.k&&!e.target.classList.contains("abt"))e.preventDefault()});
-
-function mode(on){edit=on;document.body.classList.toggle("edit",on);$("#ed").style.display=on?"none":"";render();if(on)scrollTo(0,0)}
-$("#ed").onclick=function(){mode(true)};
-$("#b-done").onclick=function(){mode(false)};
-$("#b-links").onclick=function(){var L=D.lk;dlg("Edit links",[{k:"email",l:"Email",v:L.email},{k:"linkedin",l:"LinkedIn URL",v:L.linkedin},{k:"instagram",l:"Instagram URL",v:L.instagram},{k:"facebook",l:"Facebook URL",v:L.facebook},{k:"cv",l:"CV link (PDF on Drive, or any URL)",v:L.cv}],function(o){D.lk=o;save();render()})};
-$("#b-exp").onclick=function(){var j=JSON.stringify(D);dlg("Export data",[{k:"x",l:"Copy this text and keep it safe. Photos are included.",v:j,a:1}],function(){})};
-$("#b-imp").onclick=function(){dlg("Import data",[{k:"x",l:"Paste previously exported data",a:1}],function(o){try{D=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(o.x));save();render()}catch(e){alert("That data could not be read.")}})};
-$("#b-rst").onclick=function(){if(confirm("Reset everything to the original content?")){D=JSON.parse(JSON.stringify(DEF));save();render()}};
-$("#th").onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;d.dataset.theme=dark?"light":"dark";clearRoots()};
-$("#yr").textContent=new Date().getFullYear();
-
-/* Nav highlight */
-var lk=document.querySelectorAll("nav a"),so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)lk.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)})})},{rootMargin:"-40% 0px -55% 0px"});
-document.querySelectorAll("section").forEach(function(s){so.observe(s)});
-
-/* Hero roots: follow the pointer */
-var cv=$("#cv"),cx=cv.getContext("2d"),W,H,tips=[],mx=null,my=null,segs=0,MAX=5000,hero=document.querySelector(".hero");
-var col=function(){return getComputedStyle(document.documentElement).getPropertyValue("--rt").trim()};
-function size(){var r=hero.getBoundingClientRect(),d=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
-function seed(x,y,a){tips.push({x:x,y:y,a:a==null?Math.PI/2:a,w:2.4,l:60+Math.random()*90})}
-function clearRoots(){size();cx.clearRect(0,0,W,H);tips=[];segs=0;for(var i=0;i<4;i++)seed(W*(.2+.2*i),0,Math.PI/2+(Math.random()-.5)*.6)}
-function step(){var nx=[];
- for(var i=0;i<tips.length;i++){var t=tips[i],w=Math.PI/2;
-  if(mx!=null){var dx=mx-t.x,dy=my-t.y;if(dx*dx+dy*dy<80000)w=Math.atan2(dy,dx)}
-  t.a+=Math.atan2(Math.sin(w-t.a),Math.cos(w-t.a))*.07+(Math.random()-.5)*.35;
-  var x=t.x+Math.cos(t.a)*3,y=t.y+Math.sin(t.a)*3;
-  cx.strokeStyle=col();cx.globalAlpha=Math.min(1,.3+t.w/3);cx.lineWidth=t.w;cx.lineCap="round";cx.beginPath();cx.moveTo(t.x,t.y);cx.lineTo(x,y);cx.stroke();
-  t.x=x;t.y=y;t.l--;t.w*=.994;segs++;
-  if(t.l>0&&y<H+10&&x>-10&&x<W+10&&t.w>.3){nx.push(t);if(Math.random()<.02&&nx.length<140)nx.push({x:x,y:y,a:t.a+(Math.random()<.5?-1:1)*(.7+Math.random()*.5),w:t.w*.7,l:40+Math.random()*60})}}
- cx.globalAlpha=1;tips=nx;if(tips.length<3&&segs<MAX)seed(Math.random()*W,0,Math.PI/2)}
-addEventListener("pointermove",function(e){var r=hero.getBoundingClientRect();if(e.clientY<r.top||e.clientY>r.bottom){mx=null;return}mx=e.clientX-r.left;my=e.clientY-r.top;if(tips.length<50&&segs<MAX&&Math.random()<.25)seed(mx,my,Math.PI/2+(Math.random()-.5))});
-hero.addEventListener("click",function(e){if(e.target.closest("a,button,.av,[data-k]"))return;var r=hero.getBoundingClientRect();for(var i=0;i<4;i++)seed(e.clientX-r.left,e.clientY-r.top,Math.PI/2+(Math.random()-.5)*1.6);segs=Math.min(segs,MAX-1200)});
-addEventListener("resize",clearRoots);
-render();clearRoots();
-if(matchMedia("(prefers-reduced-motion:reduce)").matches){for(var n=0;n<500;n++)step()}else(function f(){if(segs<MAX||tips.length)step();requestAnimationFrame(f)})();
-})();
-</script>
-</body>
-</html>
+<link rel="stylesheet" href="style.css"></head>
+<body><nav></nav><main></main><footer></footer>
+<!-- EDIT THIS DATA: it is the content of the page -->
+<script>window.PAGE={
+ "type": "home",
+ "name": "Arpan Das",
+ "role": "PhD student in Plant Breeding, Texas A&M University",
+ "tag": "I use MRI and plant physiology to understand how roots adapt to stress, so crops can use nutrients and water more efficiently.",
+ "stats": [
+  [
+   "MRI",
+   "Root phenotyping"
+  ],
+  [
+   "7.5",
+   "IELTS overall, no band below 6.5"
+  ],
+  [
+   "3.97 / 4",
+   "M.Sc. CGPA"
+  ],
+  [
+   "3",
+   "Languages: Bengali, English, Hindi"
+  ]
+ ],
+ "tiles": {
+  "education": "From Barisal to College Station.",
+  "publications": "Papers, posters and preprints.",
+  "lab-experience": "Field crossing, lab work and MRI.",
+  "skills": "Data analysis, lab and field tools.",
+  "cv": "View or download my CV.",
+  "extra-curricular": "Clubs, debating and volunteering.",
+  "photography": "Photographs from my travels.",
+  "blog": "Notes on research and life.",
+  "data-analysis": "Tutorials on R, SPSS and Minitab.",
+  "contact": "Email or send a message."
+ },
+ "id": "index"
+}</script>
+<script src="app.js"></script></body></html>
