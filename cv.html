@@ -2,13 +2,127 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arpan Das</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Public+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css"></head>
+<link rel="stylesheet" href="style.css">
+<style>
+ .cv-request{max-width:760px;margin:2.5rem auto;padding:1.5rem 1.5rem 1.75rem;border:1px solid rgba(128,128,128,.35);border-radius:16px;background:rgba(128,128,128,.07)}
+ .cv-request h2{margin:0 0 .3rem}
+ .cv-request p{margin:.2rem 0 1rem;opacity:.8}
+ .cv-request label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .25rem}
+ .cv-request input,.cv-request select,.cv-request textarea{width:100%;box-sizing:border-box;font:inherit;color:inherit;padding:.6rem .75rem;border-radius:10px;border:1px solid rgba(128,128,128,.45);background:transparent}
+ .cv-request textarea{min-height:90px;resize:vertical}
+ .cv-request input:focus,.cv-request select:focus,.cv-request textarea:focus{outline:2px solid #4ade80;outline-offset:1px}
+ .cv-request option{color:#111}
+ .cv-row{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+ @media (max-width:600px){.cv-row{grid-template-columns:1fr}}
+ .cv-actions{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
+ .cv-btn{font:inherit;font-weight:600;cursor:pointer;padding:.65rem 1.3rem;border-radius:999px;border:0;background:#2f9e63;color:#fff}
+ .cv-btn:hover{background:#27855a}
+ .cv-btn.alt{background:transparent;color:inherit;border:1px solid rgba(128,128,128,.5)}
+ .cv-note{font-size:.85rem;opacity:.75;margin-top:.9rem}
+ .cv-msg{margin-top:.8rem;font-size:.9rem;color:#2f9e63;min-height:1.2em}
+ .cv-hp{position:absolute;left:-9999px;height:0;width:0;opacity:0}
+</style></head>
 <body><nav></nav><main></main><footer></footer>
 <!-- EDIT THIS DATA: it is the content of the page -->
 <script>window.PAGE={
- "type": "cv",
+ "type": "list",
  "title": "Curriculum Vitae",
- "sub": "Put your CV in this folder as cv.pdf and it will appear below.",
+ "sub": "A summary of my background. The full CV is shared on request, see the form below.",
+ "empty": "",
+ "items": [
+  {
+   "t": "Current position",
+   "s": "Graduate Assistant – Research · Texas A&amp;M University",
+   "tag": "Highlights",
+   "rows": [
+    ["Since", "January 2025"],
+    ["Department", "Soil and Crop Sciences, Texas A&amp;M University, College Station, Texas, USA"],
+    ["Focus", "Non-destructive MRI root phenotyping of wheat for drought tolerance, and Biological Nitrification Inhibition (BNI) screening"]
+   ]
+  },
+  {
+   "t": "Previous position",
+   "s": "Research Assistant · Bangladesh Agricultural University",
+   "tag": "Highlights",
+   "rows": [
+    ["Period", "April 2023 – November 2024"],
+    ["Focus", "Wheat, maize, rice and tomato breeding and characterization under abiotic stress, in the Plant Molecular Genetics Laboratory"]
+   ]
+  },
+  {
+   "t": "Publications",
+   "s": "Peer-reviewed work",
+   "tag": "Highlights",
+   "rows": [
+    ["Research papers", "5 published, 1 under review"],
+    ["Book chapters", "2"],
+    ["Review papers", "6"],
+    ["Full list", "See the Publications page"]
+   ]
+  },
+  {
+   "t": "Academics and language",
+   "s": "Training and test scores",
+   "tag": "Highlights",
+   "rows": [
+    ["M.Sc. CGPA", "3.97 / 4"],
+    ["IELTS", "7.5 overall, no band below 6.5"],
+    ["Languages", "Bengali, English, Hindi"]
+   ]
+  },
+  {
+   "t": "Core skills",
+   "s": "Methods and tools",
+   "tag": "Highlights",
+   "rows": [
+    ["Lab and imaging", "MRI phenotyping, root exudate bio-assays, DNA analysis, PCR"],
+    ["Data", "R, Minitab, SPSS, STAR"],
+    ["More", "See the Skills page"]
+   ]
+  }
+ ],
  "id": "cv"
 }</script>
-<script src="app.js"></script></body></html>
+<script src="app.js"></script>
+<script>
+(function(){
+ // Email is assembled in pieces so it is not sitting in the page as plain text for scrapers.
+ var user="arpandas98bd", host="gmail.com";
+ var sec=document.createElement("section"); sec.className="cv-request"; sec.id="request-cv";
+ sec.innerHTML=
+  '<h2>Request the full CV</h2>'+
+  '<p>My full CV is not posted publicly. Tell me a little about yourself and I will reply with a copy, usually within a few days.</p>'+
+  '<div class="cv-row"><div><label for="cvName">Your name *</label><input id="cvName" autocomplete="name"></div>'+
+  '<div><label for="cvEmail">Your email *</label><input id="cvEmail" type="email" autocomplete="email"></div></div>'+
+  '<div class="cv-row"><div><label for="cvOrg">Organization</label><input id="cvOrg" autocomplete="organization"></div>'+
+  '<div><label for="cvPurpose">Purpose *</label><select id="cvPurpose"><option value="">Select one</option>'+
+  '<option>Job or postdoc opportunity</option><option>Graduate admission</option><option>Collaboration</option>'+
+  '<option>Scholarship or award</option><option>Other</option></select></div></div>'+
+  '<label for="cvMsg">Message</label><textarea id="cvMsg" placeholder="Anything that helps me respond (optional)"></textarea>'+
+  '<input class="cv-hp" id="cvHp" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+  '<div class="cv-actions"><button type="button" class="cv-btn" id="cvSend">Send request</button>'+
+  '<button type="button" class="cv-btn alt" id="cvCopy">Copy my email address</button></div>'+
+  '<div class="cv-msg" id="cvStatus" role="status"></div>'+
+  '<div class="cv-note">Sending opens your email app with the request already written. Nothing is stored on this website.</div>';
+ function $(id){return sec.querySelector("#"+id);}
+ function say(t){$("cvStatus").textContent=t;}
+ $("cvSend").onclick=function(){
+  if($("cvHp").value)return;
+  var n=$("cvName").value.trim(), e=$("cvEmail").value.trim(), p=$("cvPurpose").value;
+  if(!n||!e||!p){say("Please fill in your name, email and purpose.");return;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){say("That email address does not look right.");return;}
+  var body="Hello Arpan,\n\nI would like to request a copy of your full CV.\n\nName: "+n+"\nEmail: "+e+
+   "\nOrganization: "+($("cvOrg").value.trim()||"-")+"\nPurpose: "+p+"\n\n"+($("cvMsg").value.trim()||"")+"\n\nThank you.";
+  location.href="mailto:"+user+"@"+host+"?subject="+encodeURIComponent("CV request from "+n)+"&body="+encodeURIComponent(body);
+  say("Your email app should open now. If it did not, use the copy button and write to me directly.");
+ };
+ $("cvCopy").onclick=function(){
+  var a=user+"@"+host;
+  if(navigator.clipboard){navigator.clipboard.writeText(a).then(function(){say("Email address copied: "+a);},function(){say(a);});}
+  else say(a);
+ };
+ function mount(){var m=document.querySelector("main"); if(m) m.insertAdjacentElement("afterend",sec);}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount); else mount();
+})();
+</script>
+</body></html>
