@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Root Viewer — 3D MRI root analysis</title>
+<meta name="description" content="Upload a 3D MRI .mat scan of a root system, view it in 3D, measure root number and length, correct and export — all in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">⌇</span> Root Viewer <span class="tag">3D MRI root analysis</span></div>
+  <div class="file" id="fileName">No scan loaded</div>
+  <div class="actions">
+    <button id="btnExample" class="ghost" hidden>Load example</button>
+    <label class="btn primary">Upload .mat<input type="file" id="fileInput" accept=".mat" hidden></label>
+    <button id="btnHelp" class="ghost" title="How to use">?</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side" id="side">
+    <section>
+      <h2>1 · Scan</h2>
+      <div class="row"><label>Variable</label><select id="selVar"></select></div>
+      <div class="row"><label>Vertical axis</label><select id="selVert"><option value="0">axis 1 (rows)</option><option value="1">axis 2 (cols)</option><option value="2" selected>axis 3 (slices)</option></select></div>
+      <div class="row"><label><input type="checkbox" id="chkBaseHigh" checked> Plant base at high index</label></div>
+      <div class="row"><label>Voxel size (mm)</label><span class="trip"><input type="number" id="vx0" value="2" step="0.1" min="0.001"><input type="number" id="vx1" value="2" step="0.1" min="0.001"><input type="number" id="vx2" value="2" step="0.1" min="0.001"></span></div>
+      <button id="btnReload" class="wide">Reload with these settings</button>
+    </section>
+
+    <section>
+      <h2>2 · Detection settings</h2>
+      <div id="paramForm"></div>
+      <div class="btnrow"><button id="btnRun" class="primary grow">▶ Run analysis</button><button id="btnDefaults">Defaults</button></div>
+      <div class="status" id="status"></div>
+    </section>
+
+    <section>
+      <h2>3 · Select &amp; correct</h2>
+      <p class="hint">Double-click any object in the 3D view to select it (marker, noise, water blob, root). Or use the eraser / add tools at the top-left of the view.</p>
+      <div class="sel" id="selInfo">Nothing selected</div>
+      <div class="btnrow"><button id="btnRoot">✓ Mark as root</button><button id="btnNonroot">✗ Mark as non-root</button></div>
+      <div class="btnrow"><button id="btnUndo">Undo last</button><button id="btnClear">Clear all corrections</button></div>
+      <div class="edits" id="editList">Corrections: none</div>
+    </section>
+
+    <section>
+      <h2>4 · Results</h2>
+      <table class="kv" id="tblTraits"></table>
+      <h3>Root length by depth</h3>
+      <div id="depthChart" class="chart"></div>
+      <h3>Individual roots <span class="muted">— click a row to highlight</span></h3>
+      <div class="scroll"><table class="grid" id="tblRoots"></table></div>
+    </section>
+
+    <section>
+      <h2>5 · Compare runs</h2>
+      <div class="btnrow"><input type="text" id="runName" placeholder="run name (optional)" class="grow"><button id="btnSaveRun">Save current run</button></div>
+      <div class="scroll"><table class="grid" id="tblRuns"></table></div>
+      <div class="btnrow"><button id="btnLoadRun">Load settings of selected</button><button id="btnDelRun">Delete selected</button></div>
+      <p class="hint">Tick “Show” to overlay a saved run’s skeleton in its own colour. Hide the current layers to compare clearly.</p>
+    </section>
+
+    <section>
+      <h2>6 · Export</h2>
+      <div id="exportOpts"></div>
+      <button id="btnExport" class="primary wide">Download results (.zip)</button>
+    </section>
+    <footer class="foot">Runs entirely in your browser — your scans are never uploaded anywhere.</footer>
+  </aside>
+
+  <main class="view" id="view">
+    <canvas id="canvas"></canvas>
+    <div class="tools">
+      <button data-tool="select" class="on" title="Double-click to select">🖱 Select</button>
+      <button data-tool="erase" title="Click on roots to erase a sphere">⌫ Erase</button>
+      <button data-tool="add" title="Click on bright MRI signal to add a sphere of root">＋ Add</button>
+      <label class="rad">radius <input type="number" id="toolRadius" value="3" min="1" max="20" step="1"> vox</label>
+    </div>
+    <div class="layers" id="layers"><div class="lh">Layers <button id="btnLayersToggle" class="tiny">–</button></div><div id="layerList"></div></div>
+    <div class="views">
+      <button data-view="front">Front</button><button data-view="angled">Angled</button><button data-view="side">Side</button><button data-view="top">Top</button><button id="btnSpin">⟳ Spin</button>
+    </div>
+    <div class="legend"><span><i style="background:#f2b45a"></i>Main</span><span><i style="background:#5fd0c0"></i>Lateral</span><span><i style="background:#c98bd6"></i>Fragment</span><span><i style="background:#4fa3ff"></i>Water</span><span><i style="background:#ffe14d"></i>Tip</span></div>
+    <div class="drop" id="drop">
+      <div class="dropbox">
+        <div class="big">Drop a .mat MRI scan here</div>
+        <div>or use <b>Upload .mat</b> at the top right</div>
+        <div class="muted small">MATLAB v5/v7 files with a 3D array (e.g. variable <code>im</code>). Nothing is uploaded — analysis runs on your computer.</div>
+      </div>
+    </div>
+    <div class="busy" id="busy" hidden><div class="spin"></div><div id="busyMsg">Working…</div></div>
+  </main>
+</div>
+
+<div class="modal" id="help" hidden>
+  <div class="card">
+    <button class="close" id="helpClose">×</button>
+    <h2>How to use Root Viewer</h2>
+    <ol>
+      <li><b>Upload</b> a .mat scan (or drag it onto the page). The first analysis takes ~10–30 s; later runs take a few seconds.</li>
+      <li><b>Look around</b>: drag to rotate, scroll to zoom, right-drag to pan. Use the view buttons and the <b>Layers</b> panel (tick boxes and opacity sliders). The original MRI has its own contrast sliders.</li>
+      <li><b>Tune detection</b> in section 2: lower thresholds find fainter roots but more noise. Hover any setting for an explanation. Press <b>Run analysis</b>.</li>
+      <li><b>Correct</b>: double-click a marker, noise speck or water blob, then <b>Mark as root / non-root</b>. Use <b>Erase</b> or <b>Add</b> (top-left of the view) to click away or add bits of root.</li>
+      <li><b>Compare</b>: save runs with different settings, then tick <b>Show</b> to overlay them.</li>
+      <li><b>Export</b>: traits and per-root tables (CSV), settings (JSON), volumes (MATLAB .mat), RSML architecture, a shareable 3D HTML page and a screenshot, all in one .zip.</li>
+    </ol>
+    <p class="muted">Colours: orange = main roots, teal = laterals, purple = detached fragments, blue = water removed, yellow = tips, grey = markers, red = noise, pink = excluded by you, magenta = selection.</p>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
